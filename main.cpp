@@ -240,7 +240,7 @@ int main(int argc, char* argv[]) {
 //               ntohs(ip_hdr->ip_len), ip_hdr->ip_hl, tcp_hdr->th_off); // total length means total pcap amount - ether header
 //        printf("%ld, %ld, %ld", sizeof(struct libnet_ethernet_hdr), sizeof(struct libnet_ipv4_hdr), sizeof(struct libnet_tcp_hdr)); // 14, 20, 20 // but tcp option
 
-        int payload_size = ntohs(ip_hdr->ip_len) - (ip_hdr->ip_hl*4) - (tcp_hdr->th_off*4);  // *4 to 32 bit -> 1 byte
+        int payload_size = ntohs(ip_hdr->ip_len) - (ip_hdr->ip_hl*4) - (tcp_hdr->th_off*4);  // hl is in 4 byte units, so *4
 
         if (payload_size > MAX_PRINT_NUM){
             payload_printer(payload, MAX_PRINT_NUM);
